@@ -5,6 +5,7 @@ import InputTodo from '../components/InputTodo';
 import TodoList from '../components/TodoList';
 import { getTodoList } from '../api/todo';
 import { Todo } from '../types/types';
+import '../css/main.css';
 
 const Main = () => {
   const [todoListData, setTodoListData] = useState<Todo[]>([]);

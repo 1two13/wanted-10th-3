@@ -4,6 +4,7 @@ import { FaPlusCircle, FaSpinner } from 'react-icons/fa';
 import { createTodo } from '../api/todo';
 import useFocus from '../hooks/useFocus';
 import { InputTodoProps, Todo } from '../types/types';
+import '../css/inputTodo.css';
 
 const InputTodo = ({ setTodos }: InputTodoProps) => {
   const [inputText, setInputText] = useState('');

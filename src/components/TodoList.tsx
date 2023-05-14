@@ -2,6 +2,7 @@ import React from 'react';
 
 import TodoItem from './TodoItem';
 import { TodoListProps, Todos } from '../types/types';
+import '../css/todoList.css';
 
 const TodoList = ({ todos, setTodos }: TodoListProps) => {
   return todos.length ? (

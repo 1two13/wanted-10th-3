@@ -3,6 +3,7 @@ import { FaSpinner, FaTrash } from 'react-icons/fa';
 
 import { deleteTodo } from '../api/todo';
 import { TodoItemProps, Todo } from '../types/types';
+import '../css/todoItem.css';
 
 const TodoItem = ({ id, title, setTodos }: TodoItemProps) => {
   const [isLoading, setIsLoading] = useState(false);

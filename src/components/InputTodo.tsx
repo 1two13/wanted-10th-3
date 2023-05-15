@@ -1,15 +1,17 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { FaPlusCircle, FaSpinner } from 'react-icons/fa';
 
 import { createTodo } from '../api/todo';
 import useFocus from '../hooks/useFocus';
-import { InputTodoProps, Todo } from '../types/types';
+import { TodoListContext } from '../hooks/useContext';
+import { Todo } from '../types/types';
 import '../css/inputTodo.css';
 
-const InputTodo = ({ setTodos }: InputTodoProps) => {
+const InputTodo = () => {
   const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { ref, setFocus } = useFocus();
+  const { setTodoListData } = useContext(TodoListContext);
 
   useEffect(() => {
     setFocus();
@@ -30,7 +32,7 @@ const InputTodo = ({ setTodos }: InputTodoProps) => {
         const { data } = await createTodo(newItem);
 
         if (data) {
-          return setTodos((prev: Todo[]) => [...prev, data]);
+          return setTodoListData((prev: Todo[]) => [...prev, data]);
         }
       } catch (error) {
         console.error(error);
@@ -40,7 +42,7 @@ const InputTodo = ({ setTodos }: InputTodoProps) => {
         setIsLoading(false);
       }
     },
-    [inputText, setTodos]
+    [inputText, setTodoListData]
   );
 
   return (

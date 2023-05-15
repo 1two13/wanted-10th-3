@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import TodoItem from './TodoItem';
-import { TodoListProps, Todos } from '../types/types';
+import { Todos } from '../types/types';
+import { TodoListContext } from '../hooks/useContext';
 import '../css/todoList.css';
 
-const TodoList = ({ todos, setTodos }: TodoListProps) => {
-  return todos.length ? (
+const TodoList = () => {
+  const { todoListData } = useContext(TodoListContext);
+
+  return todoListData.length ? (
     <ul>
-      {todos.map(({ id, title }: Todos) => (
-        <TodoItem key={String(id)} id={id} title={title} setTodos={setTodos} />
+      {todoListData.map(({ id, title }: Todos) => (
+        <TodoItem key={String(id)} id={id} title={title} />
       ))}
     </ul>
   ) : (

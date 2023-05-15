@@ -21,12 +21,11 @@ export type TodoListProps = {
   setTodos: SetTodos;
 };
 
-export type TodoItemProps = {
-  id: String;
-  title: String;
-  setTodos: SetTodos;
-};
-
 export type CreateTodo = {
   title: String;
+};
+
+export type TodoListDataContext = {
+  todoListData: Todo[];
+  setTodoListData: SetTodos;
 };

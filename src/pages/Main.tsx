@@ -5,6 +5,7 @@ import InputTodo from '../components/InputTodo';
 import TodoList from '../components/TodoList';
 import { getTodoList } from '../api/todo';
 import { Todo } from '../types/types';
+import { TodoListContext } from '../hooks/useContext';
 import '../css/main.css';
 
 const Main = () => {
@@ -15,16 +16,18 @@ const Main = () => {
       const { data } = await getTodoList();
       setTodoListData(data || []);
     })();
-  }, []);
+  }, [setTodoListData]);
 
   return (
-    <div className="container">
-      <div className="inner">
-        <Header />
-        <InputTodo setTodos={setTodoListData} />
-        <TodoList todos={todoListData} setTodos={setTodoListData} />
+    <TodoListContext.Provider value={{ todoListData, setTodoListData }}>
+      <div className="container">
+        <div className="inner">
+          <Header />
+          <InputTodo />
+          <TodoList />
+        </div>
       </div>
-    </div>
+    </TodoListContext.Provider>
   );
 };
 

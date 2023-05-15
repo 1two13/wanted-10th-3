@@ -13,9 +13,9 @@ const TodoItem = ({ id, title }: Todos) => {
   const handleRemoveTodo = useCallback(async () => {
     try {
       setIsLoading(true);
-      await deleteTodo(id);
-
       setTodoListData((prev: Todo[]) => prev.filter((item: Todo) => item.id !== id));
+
+      await deleteTodo(id);
     } catch (error) {
       console.error(error);
       alert('Something went wrong.');

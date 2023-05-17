@@ -1,7 +1,11 @@
 import { createContext } from 'react';
-import { TodoListDataContext } from '../types/types';
+import { Context } from '../types/contextTypes';
 
-export const TodoListContext = createContext<TodoListDataContext>({
+export const ContextList = createContext<Context>({
   todoListData: [],
+  searchedData: undefined,
+  inputText: '',
   setTodoListData: () => {},
+  setSearchedData: () => {},
+  setInputText: () => {},
 });

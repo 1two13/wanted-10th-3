@@ -24,8 +24,3 @@ export type TodoListProps = {
 export type CreateTodo = {
   title: String;
 };
-
-export type TodoListDataContext = {
-  todoListData: Todo[];
-  setTodoListData: SetTodos;
-};

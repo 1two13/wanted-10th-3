@@ -1,0 +1,33 @@
+.item-container {
+  border: 1px solid black;
+}
+
+.item {
+  list-style-type: none;
+  padding: 1px;
+  font-size: 14px;
+  max-width: 100%;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.item:hover {
+  opacity: 0.85;
+  background-color: #eaeaea;
+  border-radius: 3px;
+}
+
+.item:active {
+  background: #d5f4f1;
+  border-radius: 3px;
+}
+
+.item-option {
+  float: right;
+}
+
+.item-highlight {
+  color: #2bc9ba;
+}

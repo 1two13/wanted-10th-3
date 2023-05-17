@@ -1,17 +1,20 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { FaPlusCircle, FaSpinner } from 'react-icons/fa';
+import { FaSpinner, FaSearch } from 'react-icons/fa';
 
 import { createTodo } from '../api/todo';
+import { getSearchedList } from '../api/search';
+import { ContextList } from '../hooks/useContext';
 import useFocus from '../hooks/useFocus';
-import { TodoListContext } from '../hooks/useContext';
-import { Todo } from '../types/types';
+import useDebounce from '../hooks/useDebounce';
+import { Todo } from '../types/todoTypes';
 import '../css/inputTodo.css';
+import { DEBOUNCE_LIMIT_TIME, ERROR_ALERT_MESSAGE, EMPTY_ALERT_MESSAGE } from '../static/constants';
 
 const InputTodo = () => {
-  const [inputText, setInputText] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { ref, setFocus } = useFocus();
-  const { setTodoListData } = useContext(TodoListContext);
+  const { inputText, setInputText, setTodoListData, setSearchedData } = useContext(ContextList);
+  const debounceValue = useDebounce(inputText, DEBOUNCE_LIMIT_TIME);
 
   useEffect(() => {
     setFocus();
@@ -25,7 +28,7 @@ const InputTodo = () => {
 
         const trimmed = inputText.trim();
         if (!trimmed) {
-          return alert('Please write something');
+          return alert(EMPTY_ALERT_MESSAGE);
         }
 
         const newItem = { title: trimmed };
@@ -36,17 +39,45 @@ const InputTodo = () => {
         }
       } catch (error) {
         console.error(error);
-        alert('Something went wrong.');
+        alert(ERROR_ALERT_MESSAGE);
       } finally {
         setInputText('');
         setIsLoading(false);
       }
     },
-    [inputText, setTodoListData]
+    [inputText]
   );
+
+  useEffect(() => {
+    if (inputText.length === 0) setSearchedData(undefined);
+
+    const api = async () => {
+      try {
+        setIsLoading(true);
+
+        const trimmed = inputText.trim();
+        if (!trimmed) {
+          return alert(EMPTY_ALERT_MESSAGE);
+        }
+
+        const { data } = await getSearchedList({ q: inputText, page: 1 });
+        setSearchedData(data);
+      } catch (error) {
+        console.error(error);
+        alert(ERROR_ALERT_MESSAGE);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (debounceValue) api();
+  }, [debounceValue]);
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
+      <button className="input-submit">
+        <FaSearch className="search" />
+      </button>
       <input
         className="input-text"
         placeholder="Add new todo..."
@@ -55,13 +86,7 @@ const InputTodo = () => {
         onChange={(e) => setInputText(e.target.value)}
         disabled={isLoading}
       />
-      {!isLoading ? (
-        <button className="input-submit" type="submit">
-          <FaPlusCircle className="btn-plus" />
-        </button>
-      ) : (
-        <FaSpinner className="spinner" />
-      )}
+      {!isLoading ? '' : <FaSpinner className="spinner" />}
     </form>
   );
 };

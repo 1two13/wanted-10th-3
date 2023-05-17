@@ -1,5 +1,5 @@
 import apiRequest from './index';
-import { CreateTodo } from '../types/types';
+import { CreateTodo } from '../types/todoTypes';
 
 const RESOURCE = '/todos';
 

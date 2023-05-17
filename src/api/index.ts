@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { CreateTodo } from '../types/types';
+import { CreateTodo } from '../types/todoTypes';
 
 const baseURL = process.env.REACT_APP_API_URL;
 const token = process.env.REACT_APP_TOKEN;

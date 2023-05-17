@@ -1,12 +1,11 @@
 import React, { useContext } from 'react';
 
 import TodoItem from './TodoItem';
-import { Todos } from '../types/types';
-import { TodoListContext } from '../hooks/useContext';
-import '../css/todoList.css';
+import { Todos } from '../types/todoTypes';
+import { ContextList } from '../hooks/useContext';
 
 const TodoList = () => {
-  const { todoListData } = useContext(TodoListContext);
+  const { todoListData } = useContext(ContextList);
 
   return todoListData.length ? (
     <ul>
@@ -15,7 +14,7 @@ const TodoList = () => {
       ))}
     </ul>
   ) : (
-    <div className="empty-list">...</div>
+    <></>
   );
 };
 export default TodoList;

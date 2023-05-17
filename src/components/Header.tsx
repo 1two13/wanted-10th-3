@@ -5,7 +5,6 @@ const Header = () => {
   return (
     <header className="headerStyle">
       <h1 className="titleStyle">Toodos</h1>
-      <h1>Toodos</h1>
     </header>
   );
 };

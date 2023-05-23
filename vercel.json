@@ -2,7 +2,7 @@
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "${process.env.REACT_APP_API_URL}/$1"
+      "dest": "${API_URL}/$1"
     }
   ]
 }

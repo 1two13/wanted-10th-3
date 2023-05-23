@@ -8,8 +8,6 @@ import { getSearchedList } from '../api/search';
 import { ERROR_ALERT_MESSAGE } from '../static/constants';
 import '../css/dropdown.css';
 
-const ALLOW_SCROLL_END = 10;
-
 const Dropdown = () => {
   const [isLoading, setIsLoading] = useState(false);
   const { searchedData, setSearchedData } = useContext(ContextList);
@@ -20,7 +18,7 @@ const Dropdown = () => {
     const target = e.target as HTMLDivElement;
     const { scrollHeight, scrollTop, clientHeight } = target;
 
-    if (clientHeight + scrollTop >= scrollHeight - ALLOW_SCROLL_END) {
+    if (clientHeight + scrollTop >= scrollHeight) {
       await getMoreCommendData();
     }
   };

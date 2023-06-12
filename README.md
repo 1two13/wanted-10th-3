@@ -1,5 +1,5 @@
 # 원티드 프리온보딩 기업과제
-[🔗 배포 링크](wanted-10th-3.vercel.app)
+[🔗 배포 링크](https://wanted-10th-3.vercel.app/)
 
 ## 목차
 - [프로젝트 소개](#1-프로젝트-소개)
